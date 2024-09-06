@@ -1,0 +1,31 @@
+<% if(success && success.length){ %>
+
+<div
+  id="flashMessage"
+  class="flex items-center justify-between bg-green-100 border-2 text-lg text-green-500 ml-[20%] w-1/2 py-2 px-4 rounded-md"
+>
+  <span><%= success %></span>
+  <button id="closeFlash" class="text-green-500 hover:text-green-600">
+    <i class="fa fa-times"></i>
+  </button>
+</div>
+
+<% } %> <% if(error && error.length){ %>
+
+<div
+  id="flashMessage"
+  class="flex items-center justify-between bg-red-100 border-2 text-lg text-red-500 ml-[20%] w-1/2 py-2 px-4 rounded-md"
+>
+  <span><%= error %></span>
+  <button id="closeFlash" class="text-red-500 hover:text-red-600">
+    <i class="fa fa-times"></i>
+  </button>
+</div>
+
+<% } %>
+
+<script>
+  document.getElementById("closeFlash").addEventListener("click", function () {
+    document.getElementById("flashMessage").style.display = "none";
+  });
+</script>

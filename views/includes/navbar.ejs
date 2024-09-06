@@ -1,0 +1,46 @@
+<nav class="w-full h-[12%] bg-[#F7F7F7] flex items-center px-4 md:px-20">
+  <!-- Logo and Icon -->
+  <div class="w-1/4 flex items-center justify-between md:justify-start">
+    <!-- Luce text for larger screens -->
+    <span class="text-2xl md:text-3xl font-['Raleway'] hidden md:block"
+      >Luce</span
+    >
+    <!-- Icon for smaller screens -->
+    <i class="fa-solid fa-gem text-[#393E46] text-2xl md:hidden"></i>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="w-1/2 flex justify-center">
+    <ul class="flex gap-6 items-center text-base md:text-lg">
+      <li><a class="nounderline hover:overline" href="/">Home</a></li>
+      <li><a class="nounderline hover:overline" href="/shop">Shop</a></li>
+      <li><a class="nounderline hover:overline" href="/About">About</a></li>
+    </ul>
+  </div>
+
+  <!-- Icons and Account Menu -->
+  <div class="w-1/4 flex items-center justify-end gap-6">
+    <a href="/cart">
+      <span
+        class="material-symbols-outlined text-xl md:text-2xl hover:text-red-400"
+      >
+        shopping_bag
+      </span>
+    </a>
+    <button class="group relative">
+      <span class="material-symbols-outlined text-xl md:text-2xl">
+        account_circle
+      </span>
+      <div
+        class="bg-[#393E46] text-[#F7F7F7] py-2 rounded-lg px-4 flex flex-col absolute right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200"
+      >
+        <% if(!currentUser) { %>
+        <a class="py-1 hover:overline" href="/signup">Signup</a>
+        <a class="py-1 hover:overline" href="/login">Login</a>
+        <% } %> <% if(currentUser) { %>
+        <a class="py-1 hover:overline" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </button>
+  </div>
+</nav>

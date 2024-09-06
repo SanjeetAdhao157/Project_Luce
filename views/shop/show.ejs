@@ -1,0 +1,84 @@
+<% layout("/layouts/boilerplate") %>
+<div class="w-full h-auto flex flex-col md:flex-row pt-[5%]">
+  <!-- Image Section -->
+  <div
+    class="h-[100%] w-full md:w-[45%] flex justify-center items-center mb-5 md:mb-0"
+  >
+    <img
+      class="object-contain w-[90%] h-[90%] md:w-[80%] md:h-[80%]"
+      src="<%=product.image.url %>"
+      alt="Product Image"
+    />
+  </div>
+
+  <!-- Product Details Section -->
+  <div
+    class="w-full md:w-[55%] h-full flex flex-col justify-center items-center md:items-start text-center md:text-left mt-5 md:mt-0"
+  >
+    <h2 class="text-lg md:text-xl font-semibold mb-2"><%= product.name %></h2>
+
+    <h1 class="text-red-500 mb-3 font-semibold">
+      &#8377; <%= (product.price * (1 - (product.discount / 100))).toFixed(0) %>
+    </h1>
+
+    <hr class="mb-3 w-[95%] bg-[#EEEEEE]" />
+    <p class="tracking-tight mb-3 text-justify pr-5 px-2">
+      <%= product.description %>
+    </p>
+    <hr class="mb-3 w-[95%] bg-[#EEEEEE]" />
+
+    <!-- Add to Cart Form -->
+    <form
+      class="w-full md:w-1/2 flex justify-center md:justify-start"
+      method="post"
+      action="/cart"
+    >
+      <input type="hidden" name="id" value="<%= product._id %>" />
+      <input
+        class="border-2 w-16 h-10 text-lg text-center border-black py-2"
+        type="number"
+        name="quantity"
+        value="1"
+        min="1"
+      />
+      <button class="bg-[#393E46] ml-4 py-3 px-4 text-white text-sm mb-3">
+        ADD TO CART
+      </button>
+    </form>
+
+    <hr class="mb-3 w-[95%] bg-[#EEEEEE]" />
+
+    <!-- Edit/Delete Buttons for Product Owner -->
+    <% if (currentUser && currentUser._id.equals(product.owner)) { %>
+    <div
+      class="flex flex-col md:flex-row justify-center md:justify-start mb-2 space-y-2 md:space-y-0 md:space-x-4"
+    >
+      <a
+        class="bg-blue-500 py-2 px-4 text-white text-xs"
+        href="/shop/<%=product._id%>/Edit"
+        >Edit</a
+      >
+      <form method="post" action="/shop/<%=product._id%>/Delete?_method=Delete">
+        <button class="bg-red-500 py-2 px-4 text-white text-xs">Delete</button>
+      </form>
+    </div>
+    <% } %>
+
+    <!-- Social Media Share Links -->
+    <p class="mt-4">
+      Share this Product
+      <a class="mr-2 ml-2 hover:text-red-400" href=""
+        ><i class="fa-brands fa-facebook" style="color: #000000"></i
+      ></a>
+      <a class="mr-2 ml-2 hover:text-red-400" href=""
+        ><i class="fa-brands fa-pinterest" style="color: #000000"></i
+      ></a>
+      <a class="mr-2 ml-2 hover:text-red-400" href=""
+        ><i class="fa-brands fa-instagram" style="color: #000000"></i
+      ></a>
+      <a class="mr-2 ml-2 hover:text-red-400" href=""
+        ><i class="fa-brands fa-youtube" style="color: #000000"></i
+      ></a>
+    </p>
+  </div>
+</div>

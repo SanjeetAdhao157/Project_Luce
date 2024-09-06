@@ -1,0 +1,55 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="w-full bg-[#EEEEEE]">
+
+  <h1 class="text-center w-full pt-8 text-3xl">Create Product</h1>
+  <form class="flex flex-col items-center text-lg py-[2%]" action="/create" method="post" enctype="multipart/form-data">
+    <input
+      class="w-1/2 py-3 px-4 mt-4 rounded-lg"
+      type="text"
+      placeholder="Enter Product Name"
+      required
+      name="name"
+    />
+    <input
+    class="w-1/2 py-3 px-4 mt-4 rounded-lg"
+    type="text"
+    placeholder="Enter Product Description"
+    required
+    name="description"
+  />
+    <input
+      class="w-1/2 py-3 px-4 mt-4 rounded-lg"
+      type="number"
+      placeholder="Enter Price"
+      required
+      name="price"
+    />
+    <div class="w-1/2 flex justify-between items-center">
+      <select class="px-10 mt-4 py-4 rounded-lg" name="itemType" id="">
+        <option class="" value="">Select Product Type</option>
+        <option value="shoes">Shoes</option>
+        <option value="bags">Bags</option>
+        <option value="watches">watches</option>
+      </select>
+      <input
+        class="w-1/2 py-3 px-4 mt-4 rounded-lg bg-white"
+        type="file"
+        required
+        name="image"
+      />
+    </div>
+
+    <input
+      class="w-1/2 py-3 px-4 mt-4 rounded-lg mb-6"
+      type="number"
+      placeholder="Enter Discount %"
+      name="discount"
+    />
+
+    <button class="py-2 px-6 rounded-full bg-[#393E46] text-white">
+      Add Product
+    </button>
+  </form>
+</div>
+<hr class="w-full mt-4 mb-4" />

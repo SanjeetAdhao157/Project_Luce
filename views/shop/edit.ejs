@@ -1,0 +1,58 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="w-full bg-[#EEEEEE] px-4 md:px-0">
+  <h1 class="w-full text-center text-2xl pt-5">Edit Product</h1>
+  <form class="flex flex-col items-center text-lg py-[1%]" enctype="multipart/form-data" action="/shop/<%=product._id%>/update?_method=PUT" method="post">
+    
+    <input
+      class="w-full md:w-1/2 py-3 px-4 mt-4 rounded-lg"
+      type="text"
+      value="<%=product.name%>"
+      required
+      name="name"
+    />
+    
+    <input
+      class="w-full md:w-1/2 py-3 px-4 mt-4 rounded-lg"
+      type="text"
+      value="<%=product.description%>"
+      required
+      name="description"
+    />
+    
+    <input
+      class="w-full md:w-1/2 py-3 px-4 mt-4 rounded-lg"
+      type="number"
+      value="<%=product.price%>"
+      required
+      name="price"
+    />
+    
+    <div class="w-full md:w-1/2 flex flex-col md:flex-row justify-between items-center mt-4">
+      <select class="w-full md:w-1/3 px-10 py-3 rounded-lg mb-4 md:mb-0" name="itemType" id="">
+        <option value="shoes" <%= product.itemType === 'shoes' ? 'selected' : '' %>>Shoes</option>
+        <option value="bags" <%= product.itemType === 'bags' ? 'selected' : '' %>>Bags</option>
+        <option value="watches" <%= product.itemType === 'watches' ? 'selected' : '' %>>Watches</option>
+      </select>
+      
+      <input
+        class="w-full md:w-1/2 py-3 px-4 mt-4 md:mt-0 rounded-lg bg-white"
+        type="file"
+        name="image"
+      />
+    </div>
+
+    <input
+      class="w-full md:w-1/2 py-3 px-4 mt-4 rounded-lg mb-6"
+      type="number"
+      value="<%=product.discount%>"
+      name="discount"
+    />
+
+    <button class="py-2 mb-2 px-6 rounded-full bg-[#393E46] text-white">
+      Edit Product
+    </button>
+  </form>
+</div>
+
+<hr class="w-full mt-4 mb-4" />

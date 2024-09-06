@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="h-[70%] w-full bg-[#EEEEEE] pt-[10%]">
+  <form class="flex flex-col items-center text-lg w-full md:w-1/2 mx-auto px-4" action="/signup" method="post">
+    <input
+      class="w-full py-3 px-4 mt-4 rounded-lg"
+      type="text"
+      placeholder="Enter Username"
+      required
+      name="username"
+    />
+    <input
+      class="w-full py-3 px-4 mt-4 rounded-lg"
+      type="email"
+      placeholder="Enter Email"
+      required
+      name="email"
+    />
+    <input
+      class="w-full py-3 px-4 mt-4 rounded-lg mb-6"
+      type="password"
+      placeholder="Enter password"
+      required
+      name="password"
+    />
+    <button class="py-2 px-6 rounded-full bg-[#393E46] text-white">
+      Sign up
+    </button>
+  </form>
+</div>
+
+<hr class="w-full mt-4 mb-4">

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dynalight&family=Limelight&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <title>Luce</title>
+    <base href="/" />
+  </head>
+  <body>
+    <div class="w-full h-full bg-[#F7F7F7] font-['Montserrat'] text-[#393E46]">
+      <%- include("../includes/navbar.ejs") %> <% if(success && success.length){
+      %>
+
+      <div
+        id="flashMessage"
+        class="flex items-center justify-between bg-green-100 border-2 text-lg text-green-400 ml-[20%] w-1/2 py-2 px-4 rounded-md"
+      >
+        <span><%= success %></span>
+        <button id="closeFlash" class="text-green-400 hover:text-green-600">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+
+      <% } %> <% if(error && error.length){ %>
+
+      <div
+        id="flashMessage"
+        class="flex items-center justify-between bg-red-100 border-2 text-lg text-red-400 ml-[25%] w-1/2 py-2 px-4 rounded-md"
+      >
+        <span><%= error %></span>
+        <button id="closeFlash" class="text-red-400 hover:text-red-600">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+
+      <% } %>
+
+      <script>
+        document
+          .getElementById("closeFlash")
+          .addEventListener("click", function () {
+            document.getElementById("flashMessage").style.display = "none";
+          });
+      </script>
+      <!--  include("../includes/flash.ejs") %>  -->
+      <%- body %> <%- include("../includes/footer.ejs") %>
+    </div>
+  </body>
+</html>

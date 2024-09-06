@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dynalight&family=Limelight&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Luce</title>
+  </head>
+  <body class="bg-[#F7F7F7] font-['Montserrat'] text-[#393E46]">
+    <div class="relative">
+      <!-- Navbar Code Here (unchanged) -->
+      <nav
+        class="w-full h-[12%] bg-[#F7F7F7] py-5 flex items-center px-4 md:px-20"
+      >
+        <!-- Logo and Icon -->
+        <div class="w-1/4 flex items-center justify-between md:justify-start">
+          <!-- Luce text for larger screens -->
+          <span class="text-2xl md:text-3xl font-['Raleway'] hidden md:block"
+            >Luce</span
+          >
+          <!-- Icon for smaller screens -->
+          <i class="fa-solid fa-gem text-[#393E46] text-2xl md:hidden"></i>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="w-1/2 flex justify-center">
+          <ul class="flex gap-6 items-center text-base md:text-lg">
+            <li><a class="nounderline hover:overline" href="/">Home</a></li>
+            <li><a class="nounderline hover:overline" href="/shop">Shop</a></li>
+            <li>
+              <a class="nounderline hover:overline" href="/About">About</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Icons and Account Menu -->
+        <div class="w-1/4 flex items-center justify-end gap-6">
+          <a href="/cart">
+            <span
+              class="material-symbols-outlined text-xl md:text-2xl hover:text-red-400"
+            >
+              shopping_bag
+            </span>
+          </a>
+          <button class="group relative">
+            <span class="material-symbols-outlined text-xl md:text-2xl">
+              account_circle
+            </span>
+            <div
+              class="bg-[#393E46] text-[#F7F7F7] py-2 rounded-lg px-4 flex flex-col absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200"
+            >
+              <% if(!currentUser) { %>
+              <a class="py-1 hover:overline" href="/signup">Signup</a>
+              <a class="py-1 hover:overline" href="/login">Login</a>
+              <% } %> <% if(currentUser) { %>
+              <a class="py-1 hover:overline" href="/logout">Logout</a>
+              <% } %>
+            </div>
+          </button>
+        </div>
+      </nav>
+
+      <% if(success && success.length){ %>
+      <div
+        id="flashMessage"
+        class="flex items-center justify-between bg-green-100 border-2 text-lg text-green-400 ml-[20%] w-1/2 py-2 px-4 rounded-md"
+      >
+        <span><%= success %></span>
+        <button id="closeFlash" class="text-green-400 hover:text-green-600">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <% } %> <% if(error && error.length){ %>
+      <div
+        id="flashMessage"
+        class="flex items-center justify-between bg-red-100 border-2 text-lg text-red-400 ml-[20%] w-1/2 py-2 px-4 rounded-md"
+      >
+        <span><%= error %></span>
+        <button id="closeFlash" class="text-red-400 hover:text-red-600">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <% } %>
+
+      <script>
+        document
+          .getElementById("closeFlash")
+          .addEventListener("click", function () {
+            document.getElementById("flashMessage").style.display = "none";
+          });
+      </script>
+
+      <!-- Cart Section -->
+      <div
+        class="w-full h-full bg-[#F7F7F7] font-['Montserrat'] text-[#393E46]"
+      >
+        <% if (cartItems.length === 0) { %>
+        <h1 class="text-3xl w-full text-center pt-[15%] pb-[10%]">
+          Your Cart is Empty
+        </h1>
+        <% } else { %>
+        <div class="flex flex-col md:flex-row p-3">
+          <div class="md:w-[65%] bg-[#EEEEEE]">
+            <h1 class="w-full text-center text-xl mt-3 font-semibold">
+              Shopping Cart
+            </h1>
+            <% cartItems.forEach(item => { %>
+            <hr class="w-[90%] mx-auto mb-2 mt-4 border-[#393E46]" />
+            <div
+              class="flex flex-col md:flex-row items-center p-2 md:p-4 font-semibold"
+            >
+              <div class="w-full md:w-1/4 mb-4 md:mb-0 flex justify-center">
+                <div class="relative w-full h-44 max-w-[200px] md:max-w-full">
+                  <img
+                    class="absolute inset-0 object-fit w-full h-full"
+                    src="<%= item.product.image.url %>"
+                    alt="<%= item.product.name %>"
+                  />
+                </div>
+              </div>
+              <div class="w-full md:w-1/4 text-center mb-4 md:mb-0">
+                <p><%= item.product.itemType %></p>
+                <h3><%= item.product.name %></h3>
+              </div>
+              <div class="w-full md:w-1/4 text-center mb-4 md:mb-0">
+                <span>Quantity: <%= item.quantity %></span>
+              </div>
+              <div class="w-full md:w-1/4 text-center mb-4 md:mb-0">
+                <p>&#8377;<%= item.product.price %></p>
+              </div>
+              <div class="w-full md:w-1/4 text-center">
+                <form action="/cart/delete/<%= item._id %>" method="POST">
+                  <button class="text-red-300 hover:text-red-600">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+          <div class="md:w-[35%] h-auto mx-auto mt-4 md:mt-0">
+            <h1 class="pt-[3%] text-xl ml-6 font-semibold">Summary</h1>
+            <hr class="w-[90%] md:w-[90%] mx-auto mb-4 mt-3 border-[#393E46]" />
+            <div class="flex md:flex-row w-full px-10 justify-between">
+              <span class="font-semibold">ITEMS: <%= totalItems %></span>
+              <p class="font-semibold">PRICE: &#8377;<%= totalPrice %></p>
+            </div>
+            <p class="mt-2 px-10">SHIPPING</p>
+            <input
+              class="py-1.5 px-3 mr-2 ml-2 mt-2 w-full border rounded"
+              type="text"
+              placeholder="Enter Address"
+            />
+            <p class="mt-2 px-10">GIVE CODE</p>
+            <input
+              class="py-1.5 px-3 mr-2 ml-2 mt-2 w-full border rounded"
+              type="text"
+              placeholder="Enter Your Code"
+            />
+            <hr class="w-[90%] mx-auto mt-4 mb-4 border-[#393E46]" />
+            <span class="mt-4 px-10 font-semibold"
+              >TOTAL PRICE:
+              <span class="ml-3 text-lg"
+                >&#8377;<%= (totalPrice * 1.05).toFixed(0) %></span
+              ></span
+            >
+            <button
+              class="py-2.5 mr-2 ml-2 px-8 mt-4 bg-black text-white w-full rounded"
+            >
+              CHECKOUT
+            </button>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+      <footer>
+        <div
+          class="bg-[#EEEEEE] p-10 flex flex-col lg:flex-row items-center justify-evenly"
+        >
+          <div
+            class="flex flex-col items-center lg:items-start text-center lg:text-left h-full mb-7 lg:mb-0"
+          >
+            <h1 class="font-semibold text-3xl mb-5">Luce</h1>
+            <p class="text-sm">
+              COPYRIGHT &copy; 2024 WPRING. ALL RIGHTS RESERVED
+            </p>
+          </div>
+
+          <div class="flex flex-col items-center lg:items-start mb-5 lg:mb-0">
+            <span class="mb-2">Order History</span>
+            <span class="mb-2">My Account</span>
+            <span class="mb-2">About</span>
+            <span class="mb-2">Contact Us</span>
+          </div>
+
+          <div class="flex flex-col items-center lg:items-start mb-5 lg:mb-0">
+            <a class="mb-2 hover:text-red-400 flex items-center" href="">
+              <i class="fa-brands fa-facebook mr-2" style="color: #000000"></i>
+              Facebook
+            </a>
+            <a class="mb-2 hover:text-red-400 flex items-center" href="">
+              <i class="fa-brands fa-pinterest mr-2" style="color: #000000"></i>
+              Instagram
+            </a>
+            <a class="mb-2 hover:text-red-400 flex items-center" href="">
+              <i class="fa-brands fa-instagram mr-2" style="color: #000000"></i>
+              Pinterest
+            </a>
+            <a class="mb-2 hover:text-red-400 flex items-center" href="">
+              <i class="fa-brands fa-youtube mr-2" style="color: #000000"></i>
+              Youtube
+            </a>
+          </div>
+
+          <div class="w-full lg:w-[30%] flex flex-col items-center">
+            <p class="mb-5 text-sm text-center">
+              Sign up for our newsletter to get the latest news, announcements,
+              and specials
+            </p>
+            <div class="flex justify-center border-b-2 w-full">
+              <input
+                class="bg-[#EEEEEE] outline-none text-center lg:text-left w-full"
+                type="text"
+                placeholder="ENTER YOUR EMAIL"
+              />
+              <button>
+                <span class="font-[Limelight] text-lg"> SUBSCRIBE</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
